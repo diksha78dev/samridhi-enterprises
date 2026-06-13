@@ -7,6 +7,7 @@ import b5 from "../assets/5.png";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const BannerProduct = () => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -126,7 +127,7 @@ const BannerProduct = () => {
   return (
     <div className="container mx-auto px-4 mt-5">
       <motion.div
-        className="h-100 md:h-120 lg:h-[36rem] w-full relative rounded-xl overflow-hidden shadow-2xl border-2 border-blue-200/30 backdrop-blur-sm"
+        className="h-56 sm:h-72 md:h-96 lg:h-[36rem] w-full relative rounded-xl overflow-hidden shadow-2xl border-2 border-blue-200/30 backdrop-blur-sm"
         variants={containerVariants}
         whileHover="hover"
         onMouseEnter={() => setIsHovering(true)}
@@ -137,6 +138,47 @@ const BannerProduct = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent z-[1] pointer-events-none"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20 z-[1] pointer-events-none"></div>
+
+        {/* Hero text overlay with headline + CTA buttons. Positioned above the
+            gradient layers (z-[2]) and below the nav buttons (z-10). The text
+            is centered horizontally and sits above the dot indicators. */}
+        <div className="absolute bottom-12 sm:bottom-16 left-0 right-0 z-[2] flex flex-col items-center text-center px-6 sm:px-16 pointer-events-none">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-lg sm:text-3xl lg:text-4xl font-bold text-white drop-shadow-lg mb-1 sm:mb-2"
+          >
+            Quality Spare Parts for Every Vehicle
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="text-xs sm:text-sm text-white/90 drop-shadow-md mb-3 sm:mb-4"
+          >
+            Genuine parts for all major brands, delivered to your door
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="flex flex-row gap-2 sm:gap-3 pointer-events-auto"
+          >
+            <Link
+              to="/products"
+              className="px-4 sm:px-7 py-2 sm:py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full text-xs sm:text-sm shadow-lg transition-all duration-300"
+            >
+              Shop Now
+            </Link>
+            <Link
+              to="/"
+              className="px-4 sm:px-7 py-2 sm:py-2.5 bg-white/25 hover:bg-white/35 text-white font-semibold rounded-full text-xs sm:text-sm backdrop-blur-sm border border-white/30 transition-all duration-300"
+            >
+              Browse Brands
+            </Link>
+          </motion.div>
+        </div>
 
         <div className="absolute z-10 h-full w-full flex items-center justify-between px-4 lg:px-6">
           <motion.button
