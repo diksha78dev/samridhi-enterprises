@@ -14,8 +14,8 @@ const BannerProduct = () => {
   const [direction, setDirection] = useState(1);
   const [isHovering, setIsHovering] = useState(false);
 
-  const desktopImages = [b1, b2, b3, b4, b5];
-  const mobileImages = [b1, b2, b3, b4, b5];
+  const desktopImages = [b2];
+  const mobileImages = [b2];
 
   const nextImage = useCallback(() => {
     setDirection(1);
@@ -142,12 +142,12 @@ const BannerProduct = () => {
         {/* Hero text overlay with headline + CTA buttons. Positioned above the
             gradient layers (z-[2]) and below the nav buttons (z-10). The text
             is centered horizontally and sits above the dot indicators. */}
-        <div className="absolute bottom-12 sm:bottom-16 left-0 right-0 z-[2] flex flex-col items-center text-center px-6 sm:px-16 pointer-events-none">
+        <div className="absolute bottom-6 sm:bottom-12 left-0 right-0 z-[2] flex flex-col items-center text-center px-4">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-lg sm:text-3xl lg:text-4xl font-bold text-white drop-shadow-lg mb-1 sm:mb-2"
+            className="text-base sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-lg mb-2"
           >
             Quality Spare Parts for Every Vehicle
           </motion.h2>
@@ -155,15 +155,16 @@ const BannerProduct = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-xs sm:text-sm text-white/90 drop-shadow-md mb-3 sm:mb-4"
+            className="text-xs sm:text-sm text-white"
           >
             Genuine parts for all major brands, delivered to your door
           </motion.p>
           <motion.div
+            className="flex flex-col sm:flex-row gap-3 items-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="flex flex-row gap-2 sm:gap-3 pointer-events-auto"
+            
           >
             <Link
               to="/products"
@@ -173,14 +174,14 @@ const BannerProduct = () => {
             </Link>
             <Link
               to="/"
-              className="px-4 sm:px-7 py-2 sm:py-2.5 bg-white/25 hover:bg-white/35 text-white font-semibold rounded-full text-xs sm:text-sm backdrop-blur-sm border border-white/30 transition-all duration-300"
+              className="px-5 sm:px-7 py-2 sm:py-2.5 bg-white/25 hover:bg-white/35 text-white rounded-full text-sm"
             >
               Browse Brands
             </Link>
           </motion.div>
         </div>
 
-        <div className="absolute z-10 h-full w-full flex items-center justify-between px-4 lg:px-6">
+        <div className="hidden md:flex absolute z-10 h-full w-full items-center justify-between">
           <motion.button
             onClick={prevImage}
             variants={buttonVariants}
@@ -218,7 +219,7 @@ const BannerProduct = () => {
             >
               <img
                 src={desktopImages[currentImage]}
-                className="w-full h-full object-fit rounded-xl transform transition-transform duration-1000 hover:scale-105"
+                className="w-full h-full object-cover rounded-xl transform transition-transform duration-1000 hover:scale-105"
                 alt={`Samridhi Enterprises Banner ${currentImage + 1} - Premium Motor Parts`}
                 loading="lazy"
               />
@@ -239,7 +240,7 @@ const BannerProduct = () => {
             >
               <img
                 src={mobileImages[currentImage]}
-                className="w-full h-full object-fit rounded-xl"
+                className="w-full h-full object-cover rounded-xl"
                 alt={`Samridhi Enterprises Mobile Banner ${currentImage + 1} - Premium Motor Parts`}
                 loading="lazy"
               />
