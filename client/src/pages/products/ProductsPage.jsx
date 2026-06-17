@@ -1,12 +1,14 @@
 import { useEffect, useState, useRef, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchParts, clearPartError } from "../../store/product/partsSlice";
+import { addToCompare, removeFromCompare } from "../../store/product/compareSlice";
 import { fetchBikeModels } from "../../store/product/bikeSlice";
 import { toast } from "react-toastify";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import Loader from "../../extras/Loader";
 import { Link, useSearchParams } from "react-router-dom";
+import { GitCompare, Check } from "lucide-react";
 
 const categories = [
   "Abs",
@@ -70,6 +72,9 @@ const ProductsPage = () => {
     loading: partsLoading,
     error: partsError,
   } = useSelector((state) => state.parts);
+  const { items: compareItems, max: compareMax } = useSelector(
+    (state) => state.compare
+  );
   const {
     bikeModels = [],
     loading: bikeLoading,
@@ -191,6 +196,18 @@ const ProductsPage = () => {
     for (let y = currentYear; y >= 1990; y--) years.push(y);
     return years;
   }, []);
+
+  // Add or remove a product from the compare selection.
+  const isInCompare = (id) => compareItems.some((p) => p._id === id);
+  const toggleCompare = (e, part) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (isInCompare(part._id)) {
+      dispatch(removeFromCompare(part._id));
+    } else {
+      dispatch(addToCompare(part));
+    }
+  };
 
   const sortedAndFilteredParts = parts
     .filter((part) => {
@@ -681,6 +698,39 @@ const ProductsPage = () => {
                       </div>
                     </div>
                   </Link>
+                  {/* Compare toggle — outside the Link so it doesn't navigate */}
+                  <div className="px-3 sm:px-4 pb-3 sm:pb-4 mt-auto">
+                    <button
+                      onClick={(e) => toggleCompare(e, part)}
+                      disabled={
+                        !isInCompare(part._id) &&
+                        compareItems.length >= compareMax
+                      }
+                      className={`w-full inline-flex items-center justify-center gap-2 text-sm font-medium px-3 py-2 rounded-lg border transition disabled:opacity-50 disabled:cursor-not-allowed ${
+                        isInCompare(part._id)
+                          ? "bg-blue-600 border-blue-600 text-white hover:bg-blue-700"
+                          : "bg-white border-gray-300 text-gray-700 hover:border-blue-400 hover:text-blue-600"
+                      }`}
+                      title={
+                        !isInCompare(part._id) &&
+                        compareItems.length >= compareMax
+                          ? `You can compare up to ${compareMax} products`
+                          : isInCompare(part._id)
+                          ? "Remove from comparison"
+                          : "Add to comparison"
+                      }
+                    >
+                      {isInCompare(part._id) ? (
+                        <>
+                          <Check className="w-4 h-4" /> Added to Compare
+                        </>
+                      ) : (
+                        <>
+                          <GitCompare className="w-4 h-4" /> Compare
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </motion.div>
               ))}
             </AnimatePresence>
