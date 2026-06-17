@@ -4,6 +4,7 @@ import otpSlice from "./auth-slice/otpSlice";
 import brandSlice from "./product/brandSlice";
 import bikeSlice from "./product/bikeSlice";
 import partSlice from "./product/partsSlice";
+import compareSlice from "./product/compareSlice";
 import cartSlice from "./cart/cartSlice";
 import orderSlice from "./order/orderSlice";
 import paymentSettingsSlice from "./order/paymentSettingsSlice";
@@ -16,6 +17,7 @@ const store = configureStore({
     brand: brandSlice,
     bike: bikeSlice,
     parts: partSlice,
+    compare: compareSlice,
     cart: cartSlice,
     order: orderSlice,
     paymentSettings: paymentSettingsSlice,

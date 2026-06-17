@@ -24,6 +24,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchCart } from "./store/cart/cartSlice";
 import ProductsPage from "./pages/products/ProductsPage";
+import ComparePage from "./pages/products/ComparePage";
 import Checkout from "./pages/Checkout";
 import OrderHistory from "./pages/my-profile/OrderHistory";
 import AdminOrders from "./pages/admin/AdminOrders";
@@ -32,6 +33,7 @@ import InventoryPage from "./pages/admin/InventoryPage";
 import CustomerPage from "./pages/admin/CustomerPage";
 import AdminCoupons from "./pages/admin/AdminCoupons";
 import SupportAssistant from "./components/SupportAssistant";
+import CompareTray from "./components/CompareTray";
 
 function App() {
   const dispatch = useDispatch();
@@ -64,6 +66,7 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
          <Route path="/products" element={<ProductsPage />} />
         <Route path="/products/:id" element={<SingleProductPage />} />
+        <Route path="/compare" element={<ComparePage />} />
         <Route
           path="/my-profile"
           element={
@@ -199,6 +202,7 @@ function App() {
 
       {/* Site-wide rule-based support assistant (floating widget) */}
       <SupportAssistant />
+      <CompareTray />
     </div>
   );
 }
