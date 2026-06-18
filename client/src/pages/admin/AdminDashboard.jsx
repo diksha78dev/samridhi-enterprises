@@ -159,7 +159,9 @@ const AdminDashboard = () => {
           Management
         </h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-          {quickLinks.map(({ to, label, icon: Icon }) => (
+          {quickLinks.map(
+            // eslint-disable-next-line no-unused-vars
+            ({ to, label, icon: Icon }) => (
             <Link
               key={to}
               to={to}

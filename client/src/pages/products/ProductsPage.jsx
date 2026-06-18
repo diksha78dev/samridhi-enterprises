@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Loader from "../../extras/Loader";
 import { Link, useSearchParams } from "react-router-dom";
 import { GitCompare, Check } from "lucide-react";
+import SEO from "../../components/SEO";
 
 const categories = [
   "Abs",
@@ -138,7 +139,6 @@ const ProductsPage = () => {
   // search, and the results now fit on 2 pages).
   useEffect(() => {
     setCurrentPage(1);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm, filterCategory, filterCompatibility, filterBrand, filterYear, filterEngine, filterStockStatus, sortBy, priceRange]);
 
   const handleFilterCompatibilityChange = (modelId) => {
@@ -296,6 +296,7 @@ const ProductsPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 mt-20 sm:mt-24 mb-16">
+      <SEO title="Products" />
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -631,6 +632,7 @@ const ProductsPage = () => {
                           "https://via.placeholder.com/150"
                         }
                         alt={part.name}
+                        loading="lazy"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.3, delay: 0.1 }}

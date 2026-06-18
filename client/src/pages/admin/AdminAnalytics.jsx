@@ -264,6 +264,7 @@ const TopProductsChart = ({ data }) => {
 };
 
 // Reusable section wrapper so every chart card shares the same chrome.
+// eslint-disable-next-line no-unused-vars
 const ChartCard = ({ title, icon: Icon, children, isEmpty, emptyText }) => (
   <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sm:p-6">
     <div className="flex items-center gap-2 mb-5">
